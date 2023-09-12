@@ -6,6 +6,7 @@
 POWERSHELL -nop -ep bypass -c "$f=(GC '%~f0' -raw); $e=[System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($f)); POWERSHELL -encoded $e"
 GOTO :EOF
 #>
+###POWERSHELL BELOW THIS LINE###
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
 function Size-To-Human-Readable([uint64]$size){
 	$suffix = "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
