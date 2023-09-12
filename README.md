@@ -1,4 +1,4 @@
-A CMD/Powershell hybrid launcher
+# Ninja - A CMD/Powershell hybrid launcher
 
 Ninja runs powershell inside a CMD script.<br>
 
