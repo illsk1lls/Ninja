@@ -4,7 +4,6 @@
 >nul 2>&1 fltmc|| if "%f0%" neq "%~f0" (cd.>"%temp%\runas.Admin" & start "%~n0" /high "%temp%\runas.Admin" "%~f0" "%_:"=""%" & exit /b)
 >nul 2>&1 reg delete hkcu\software\classes\.Admin\ /f & >nul 2>&1 del %temp%\runas.Admin /f /q
 POWERSHELL -nop -ep bypass -c "$f=(GC '%~f0' -raw); $e=[System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($f)); POWERSHELL -encoded $e"
-PAUSE
 GOTO :EOF
 #>
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
