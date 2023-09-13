@@ -3,7 +3,7 @@
 >nul 2>&1 reg add hkcu\software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"& set _= %*
 >nul 2>&1 fltmc|| if "%f0%" neq "%~f0" (cd.>"%temp%\runas.PSninja" & start "%~n0" /high "%temp%\runas.PSninja" "%~f0" "%_:"=""%" & exit /b)
 >nul 2>&1 reg delete hkcu\software\classes\.PSninja\ /f & >nul 2>&1 del %temp%\runas.PSninja /f /q
-POWERSHELL -nop -ep bypass -c "POWERSHELL -nop -ep bypass -en ([System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes((GC '%~f0' -raw) -Replace('###POWERSHELL BELOW THIS LINE###','$PSScriptRoot=$pwd;$PSCommandPath=''%~f0'''))))"
+POWERSHELL -nop -ep bypass -c "POWERSHELL -nop -ep bypass -en ([System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes((GC '%~f0' -raw) -Replace('###POWERSHELL BELOW THIS LINE###','$PSScriptRoot=''%~dp0'';$PSCommandPath=''%~f0'''))))"
 GOTO :EOF
 #>
 ###POWERSHELL BELOW THIS LINE###
