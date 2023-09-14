@@ -1,13 +1,11 @@
 <# ::
 @ECHO OFF
->nul 2>&1 reg add hkcu\software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"& set _= %*
->nul 2>&1 fltmc|| if "%f0%" neq "%~f0" (cd.>"%temp%\runas.PSninja" & start "%~n0" /high "%temp%\runas.PSninja" "%~f0" "%_:"=""%" & exit /b)
->nul 2>&1 reg delete hkcu\software\classes\.PSninja\ /f & >nul 2>&1 del %temp%\runas.PSninja /f /q
-SETLOCAL ENABLEDELAYEDEXPANSION & FOR %%a IN (%*) DO SET ARGS=!ARGS!%%a,
-POWERSHELL -nop -ep bypass -c "POWERSHELL -nop -ep bypass -en ([System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes((GC '%~f0' -raw) -Replace('###POWERSHELL BELOW THIS LINE###','$PSScriptRoot=''%~dp0'';$PSCommandPath=''%~f0'';Set-Location ''%~dp0''; $p=''!ARGS:~0,-1!''; $Args=$p.Split(""",""")'))))"&ENDLOCAL
+>nul 2>&1 REG ADD HKCU\Software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"&SET _= %*
+>nul 2>&1 FLTMC|| IF "%f0%" NEQ "%~f0" (CD.>"%temp%\RunAs.PSninja"&START "%~n0" /high "%temp%\RunAs.PSninja" "%~f0" "%_:"=""%"&EXIT /b)
+>nul 2>&1 REG DELETE HKCU\Software\classes\.PSninja\ /f &>nul 2>&1 del %temp%\runas.PSninja /F /Q
+(IF EXIST "%temp%\%~n0.ps1" DEL "%temp%\%~n0.ps1" /F /Q)&(mklink "%temp%\%~n0.ps1" "%~f0">nul)&POWERSHELL -nop -ep bypass -f "%temp%\%~n0.ps1" %*&DEL "%temp%\%~n0.ps1"
 GOTO :EOF
 #>
-###POWERSHELL BELOW THIS LINE###
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
 function Size-To-Human-Readable([uint64]$size){
 	$suffix = "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
