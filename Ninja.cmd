@@ -1,4 +1,4 @@
-<# ::
+<# ^:^:
 @ECHO OFF
 >nul 2>&1 REG ADD HKCU\Software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"&SET _= %*
 >nul 2>&1 FLTMC|| IF "%f0%" NEQ "%~f0" (CD.>"%temp%\RunAs.PSninja"&START "%~n0" /high "%temp%\RunAs.PSninja" "%~f0" "%_:"=""%"&EXIT /b)
