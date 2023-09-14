@@ -5,7 +5,7 @@
 >nul 2>&1 REG DELETE HKCU\Software\classes\.PSninja\ /f &>nul 2>&1 del %temp%\runas.PSninja /F /Q
 (IF EXIST "%temp%\%~n0.ps1" DEL "%temp%\%~n0.ps1" /F /Q)&(mklink "%temp%\%~n0.ps1" "%~f0">nul)&POWERSHELL -nop -ep bypass -f "%temp%\%~n0.ps1" %*&DEL "%temp%\%~n0.ps1"
 GOTO :EOF
-#>
+#> ### POWERSHELL BELOW THIS LINE ###
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
 function Size-To-Human-Readable([uint64]$size){
 	$suffix = "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
