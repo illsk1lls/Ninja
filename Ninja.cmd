@@ -1,7 +1,10 @@
->nul 2>&1 REG ADD HKCU\Software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"&SET _= %*
->nul 2>&1 FLTMC|| IF "%f0%" NEQ "%~f0" (CD.>"%temp%\RunAs.PSninja"&START "%~n0" /high "%temp%\RunAs.PSninja" "%~f0" "%_:"=""%"&EXIT /b)
->nul 2>&1 REG DELETE HKCU\Software\classes\.PSninja\ /f &>nul 2>&1 del %temp%\runas.PSninja /F /Q
-@(set "0=%~f0"^)#) & @(powershell -nop -c iex([io.file]::ReadAllText($env:0))) & @(GOTO :EOF)
+<# ::
+@ECHO OFF
+>nul 2>&1 reg add hkcu\software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"& set _= %*
+>nul 2>&1 fltmc|| if "%f0%" neq "%~f0" (cd.>"%temp%\runas.PSninja" & start "%~n0" /high "%temp%\runas.PSninja" "%~f0" "%_:"=""%" & exit /b)
+>nul 2>&1 reg delete hkcu\software\classes\.PSninja\ /f & >nul 2>&1 del %temp%\runas.PSninja /f /q
+@(set "0=%~f0"^)#) & powershell -nop -c iex([io.file]::ReadAllText($env:0)) & GOTO :EOF
+#>
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
 function Size-To-Human-Readable([uint64]$size){
 	$suffix = "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
