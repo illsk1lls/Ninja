@@ -3,8 +3,9 @@
 >nul 2>&1 reg add hkcu\software\classes\.PSninja\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\"& call \"%%2\" %%3"&set _= %*
 >nul 2>&1 fltmc|| if "%f0%" neq "%~f0" (cd.>"%temp%\runas.PSninja" & start "%~n0" /high "%temp%\runas.PSninja" "%~f0" "%_:"=""%" & exit /b)
 >nul 2>&1 reg delete hkcu\software\classes\.PSninja\ /f&>nul 2>&1 del %temp%\runas.PSninja /f /q
-(IF EXIST "%temp%\%~n0.ps1" DEL "%temp%\%~n0.ps1" /F /Q)&(mklink "%temp%\%~n0.ps1" "%~f0">nul)&POWERSHELL -nop -ep bypass -f "%temp%\%~n0.ps1" %*&DEL "%temp%\%~n0.ps1"
-#> ###POWERSHELL BELOW THIS LINE###
+(IF EXIST "%temp%\%~n0.ps1" DEL "%temp%\%~n0.ps1" /F /Q)&(mklink "%temp%\%~n0.ps1" "%~f0">nul)&POWERSHELL -nop -ep bypass -f "%temp%\%~n0.ps1" %*&DEL "%temp%\%~n0.ps1" /F /Q
+pause
+#>
 $Url='http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/2000920063/AcroRdrDC2000920063_en_US.exe'
 function Size-To-Human-Readable([uint64]$size){
 	$suffix = "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
